@@ -12,17 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.naver.dao.HugiDao;
+import com.naver.dao.HugiDaoImpl;
 import com.naver.dao.MovieDao;
 import com.naver.dao.MovieDaoImpl;
+import com.naver.dto.HugiPrintDto;
 import com.naver.dto.MovieDto;
 import com.naver.util.NaverAPIConfing;
 import com.naver.util.NvMovie;
 import com.naver.util.NvSearchApi;
 
-@WebServlet("/MovieServlet2")
-public class MovieServlet2 extends HttpServlet {
+@WebServlet("/HugiPrintServlet")
+public class HugiPrintServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public MovieServlet2() {
+    public HugiPrintServlet() {
         super();
     }
 
@@ -32,19 +35,19 @@ public class MovieServlet2 extends HttpServlet {
 		// 크롤링 버전
 //		ArrayList<MovieDto> list = NvMovie.movie();
 		// 데이터 베이스 버전
-		MovieDao dao = new MovieDaoImpl();
-		ArrayList<MovieDto> list = dao.select();
-		for (MovieDto d : list) {
+		HugiDao dao = new HugiDaoImpl();
+		ArrayList<HugiPrintDto> list = dao.select();
+		for (HugiPrintDto d : list) {
+			System.out.println(d.getNo());
 			System.out.println(d.getJe());
-			System.out.println(d.getImg());
-			System.out.println(d.getBae());
-			System.out.println(d.getGam());
-			System.out.println(d.getNum());
+			System.out.println(d.getTitle());
+			System.out.println(d.getScore());
+			System.out.println(d.getName());
 		}
-		request.setAttribute("movieList", list);
+		request.setAttribute("hugiList", list);
 		
 		// 뷰로 보냄
-		RequestDispatcher dis = request.getRequestDispatcher("movie2.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("hugi.jsp");
 		dis.forward(request, response);
 		
 	}

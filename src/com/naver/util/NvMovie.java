@@ -33,7 +33,7 @@ public class NvMovie {
 			// 링크 대상 페이지에 접근하기
 			Document nextDoc = Jsoup.connect(nextUrl).get();
 			// 상세 내용 추출하기
-			String content = nextDoc.select("div.poster > a > img").attr("src");
+			String content = nextDoc.select("#content > div.article > div.mv_info_area > div.poster > a > img").attr("src");
 //			System.out.println(content);
 			// 감독
 			// #content > div.article > div.mv_info_area > div.mv_info > dl > dd:nth-child(4) > p > a
